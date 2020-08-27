@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.HangHoaViewModel>
+
+<h1>Danh Sách Hàng Hóa</h1>
+<p>
+    <a asp-action="Create">Thêm Mới Hàng Hóa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenHh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhaCungCap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonGia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenHh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhaCungCap)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Hinh)*@
+                    <img src="~/Hinh/HangHoa/@item.Hinh" height="80" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonGia)
+                </td>
+                <td width="232px">
+                    <a asp-action="Edit" asp-route-id="@item.MaHh" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.MaHh" class="btn btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaHh" class="btn btn-danger xoa-hh">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".xoa-hh").click(function (e) {
+                let link = $(this).attr("href");
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'Chắc xóa không ?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xóa ngay!'
+                }).then((result) => {
+                    if (result.value) {
+
+                        Swal.fire(
+                            'Deleted!',
+                            'success'
+                        )
+                        window.location.href = link;
+                    }
+                });
+            });
+        });
+    </script>
+}

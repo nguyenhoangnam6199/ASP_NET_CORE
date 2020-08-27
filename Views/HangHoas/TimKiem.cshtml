@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.HangHoaTimKiem>
+
+@{
+    ViewData["Title"] = "TimKiem";
+}
+
+<h1>Tìm Kiếm Hàng Hóa</h1>
+
+<form asp-action="TimKiem">
+    Cần tìm: <input name="TuKhoa" placeholder="Hàng hóa cần tìm" />
+    Giá từ: <input name="GiaTu" />
+    đến: <input name="GiaDen" />
+    <button>Tìm</button>
+</form>
+
+<h2>Kết Quả Tìm Kiếm</h2>
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr class="bg-warning">
+                <th>Mã</th>
+                <th>Tên hàng hóa</th>
+                <th>Đơn giá</th>
+                <th>Giảm giá</th>
+                <th>Giá bán</th>
+                <th>Ngày sản xuất</th>
+                <th>Loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hh in Model)
+            {
+                <tr>
+                    <td>@hh.MaHh</td>
+                    <td>@hh.TenHh</td>
+                    <td>@hh.DonGia.ToString("#,##0") đ</td>
+                    <td>@hh.GiamGia</td>
+                    <td>@hh.GiaBan.ToString("#,##0") đ</td>
+                    <td>@hh.NgaySanXuat.ToString("dd/MM/yyyy")</td>
+                    <td>@hh.Loai</td>
+                </tr>}
+        </tbody>
+    </table>
+}

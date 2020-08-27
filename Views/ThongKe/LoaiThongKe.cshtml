@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.LoaiThongKe>
+
+@{
+    ViewData["Title"] = "LoaiThongKe";
+    var dsTenLoai = Model.Select(lo => lo.Loai).ToList();
+    var dsDoanhThu = Model.Select(lo => lo.DoanhThu).ToList();
+}
+
+<h1>Doanh số bán hàng từng loại</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr class="bg-info">
+            <th>
+                @Html.DisplayNameFor(model => model.Loai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoanhThu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoHH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaCN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaTB)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoanhThu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoHH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaNN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaCN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTB)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Biểu đồ</h1>
+
+<canvas id="pie-chart" width="700" height="350"></canvas>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            new Chart(document.getElementById("pie-chart"), {
+                type: 'pie',
+                data: {
+                    //labels: ['Mỹ', 'Úc', 'Nhật'],
+                    labels:['@Html.Raw(string.Join("', '", dsTenLoai))'],
+                    datasets: [{
+                       // label: "Doanh Thu (VND)",
+                        backgroundColor: ["#FF1493", "#FF00FF", "#FF0000", "#FFA500", "#FFFF00", "#32CD32", "#7FFFD4","#8B4513"],
+                        //data: [2478, 5267, 734]
+                        data: [@string.Join(", ", dsDoanhThu)]
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Doanh Thu Theo Loại (VND)'
+                    }
+                }
+            });
+        });
+    </script>
+}

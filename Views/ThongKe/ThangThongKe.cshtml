@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.ThangThongKe>
+
+@{
+    ViewData["Title"] = "ThangThongKe";
+    var dsThang = Model.Select(t => t.Thang).ToList();
+    var dsdt = Model.Select(dt => dt.DoanhThu).ToList();
+}
+
+<h1>Doanh Thu Theo Từng Tháng</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr class="bg-primary">
+            <th>
+                @Html.DisplayNameFor(model => model.Thang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoanhThu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoHHDaBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaCN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaTB)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoanhThu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoHHDaBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaNN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaCN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTB)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*----------------------------------Ghi chú: Phần biểu đồ đường vẫn chưa làm ra---------------------------------------------*@
+<h1>Biểu đồ</h1>
+
+<canvas id="line-chart" width="800" height="450"></canvas>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                    labels: ['@Html.Raw(string.Join("', '", dsThang))'],
+                    datasets: [
+                        data: [@string.Join(", ", dsdt)]
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Doanh thu theo từng tháng'
+                    }
+                }
+            });
+        });
+    </script>
+}

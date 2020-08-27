@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h2>Demo AJAX</h2>
+<h2 id="myClock" class="text-danger"></h2>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            function LayGio() {
+                $.ajax({
+                    //Gửi tới đâu
+                    url: "/Ajax/ServerTime",
+                    //Dữ liệu gửi lên
+                    data: "",
+                    //Phương thức
+                    type: "GET",
+                    //Xử lí dữ liệu khi thành công
+                    success: function (data) {
+                        $("#myClock").html(data);
+                    },
+                    error: function (xhr, err, data) {
+                        alert("Lỗi : " + err);
+                        console.log(xhr);
+                        console.log(err);
+                        console.log(data);
+                    }
+                });
+            }
+
+            LayGio();
+            setInterval(LayGio, 1000);
+        });
+    </script>
+}
+
