@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "JsonSearch";
+}
+
+<h1>Tìm kiếm hàng hóa</h1>
+
+<fieldset>
+    Tìm theo tên: <input id="TuKhoa" placeholder="Nhập tên cần tìm"/><br />
+    Giá từ: <input type="number" id="GiaTu"/>
+    đến: <input type="number" id="GiaDen" />
+    <button id="TimKiem" type="button">Tìm Kiếm</button>
+</fieldset>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Hình</th>
+            <th>Hàng Hóa</th>
+            <th>Giá</th>
+            <th>Loại</th>
+        </tr>
+    </thead>
+    <tbody id="result">
+
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#TimKiem").click(function () {
+                $.ajax({
+                    url: "/Ajax/JsonSearch",
+                    type: "POST",
+                    data: {
+                        TuKhoa: $("#TuKhoa").val().trim(),
+                        GiaTu: $("#GiaTu").val(),
+                        GiaDen: $("#GiaDen").val()
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $("#result").html("");
+
+                        $(response).each(function (index, hangHoa) {
+                            //duyệt qua từng phần tử
+                            let row = $("<tr />");
+                            //tạo nội dung cho thẻ tr
+                            $("<td/>").html(index + 1).appendTo(row);
+                            let hinh = $("<img/>").attr("src", "/Hinh/HangHoa/" + hangHoa.hinh);
+                            hinh.css({ "height": "80" });
+                            $("<td/>").append(hinh).appendTo(row);
+
+                            $("<td/>").html(hangHoa.tenHh).appendTo(row);
+                            $("<td/>").html(hangHoa.donGia).appendTo(row);
+                            $("<td/>").html(hangHoa.loai).appendTo(row);
+
+                            $("#result").append(row);
+                        })
+                        
+                    }   
+                });
+            });
+
+        });
+    </script>
+ }
+
