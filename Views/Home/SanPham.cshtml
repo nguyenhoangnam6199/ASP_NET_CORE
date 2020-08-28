@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Buoi3_ASP.Models.HangHoa>
+
+@{
+    ViewData["Title"] = "SanPham";
+}
+
+@*Phía có đường link kết nối với CSS*@
+<link href="~/css/HangHoa.css" rel="stylesheet" />
+
+@foreach (var hh in Model)
+{
+    <!--Begin-Hang_Hoa-->
+    <div class="hh-box">
+        <div class="hh-name">@hh.TenHH</div>
+        <img src="../HangHoa/iphone-x-256gb-gray.jpg" class="hh-img" />
+        <img src="../images/moi-icon.png" class="hh-icon" />
+        <div class="hh-actions">
+            <img src="../images/Basket.png" />
+            <img src="../images/favourites.png" />
+            <img src="..//images/Letter.png" />
+        </div>
+        <div class="hh-price">@hh.GiaBan</div>
+    </div>
+    <div class="hh-box">
+        <div class="hh-name">@hh.TenHH</div>
+        <img src="../HangHoa/samsung-galaxy-a8-star-2018.jpg" class="hh-img" />
+        <img src="../images/new.gif" class="hh-icon" />
+        <div class="hh-actions">
+            <img src="../images/Basket.png" />
+            <img src="../images/favourites.png" />
+            <img src="..//images/Letter.png" />
+        </div>
+        <div class="hh-price">@hh.GiaBan</div>
+    </div>
+    <div class="hh-box">
+        <div class="hh-name">@hh.TenHH</div>
+        <img src="../HangHoa/iphone-x-256gb-gray.jpg" class="hh-img" />
+        <img src="../images/new-icon.png" class="hh-icon" />
+        <div class="hh-actions">
+            <img src="../images/Basket.png" />
+            <img src="../images/favourites.png" />
+            <img src="..//images/Letter.png" />
+        </div>
+        <div class="hh-price">@hh.GiaBan</div>
+    </div>
+
+
+    <!--End-Hang_hoa-->
+}
+
