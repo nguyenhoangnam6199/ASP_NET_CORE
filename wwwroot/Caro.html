@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hoàng Nam</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <style>
+        td {
+            width: 70px;
+            height: 70px;
+            border: 1px dotted red;
+            text-align: center;
+        }
+        /*  td:nth-child(odd){
+            background-color: gray;
+        }*/
+
+        tr:nth-child(even) {
+            background-color: aqua;
+        }
+
+        tr:nth-child(odd) {
+            background-color: goldenrod;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $("#Show").click(function () {
+                $("#BanCo").show(3500);
+            })
+            $("#Hide").click(function () {
+                $("#BanCo").hide(3500); //Ẩn bàn cờ
+            })
+            $("#Toogle").click(function () {
+                $("#BanCo").toggle(3500);   //Hiện lại hình bàn cờ
+            })
+
+            var gt = "X";
+            $("td").click(function () {
+                if ($(this).html() == "") {
+                    $(this).html(gt);
+                    gt = (gt == "X") ? "O" : "X";
+                }
+
+            });
+
+            $("#Reset").click(function () {
+                //tìm hiểu thêm về sweetalert2
+                //lệnh confirm để hỏi người dùng có xác nhận hay ko ?
+                Swal.fire({
+                    icon: "warning",
+                    title: "Bạn có muốn reset hay không ?",
+                    showCancelButton: true,
+                    confirmButtonText: 'Có',
+                    cancelButtonText: 'Không'
+                }).then((result) => {
+                    if(result.value) {
+                        $("td").html("");
+                        //alert("Reset thành công !")
+                        Swal.fire({
+                            title: 'Reset thành công !',
+                            icon: 'success'
+                        });
+                    }
+                });
+                //let trl = confirm("Bạn có muốn reset hay không ?");
+            });
+        });
+    </script>
+</head>
+<body>
+    <button type="button" id="Show">Show</button>
+    <button type="button" id="Hide">Hide</button>
+    <button type="button" id="Toogle">Toogle</button>
+    <button type="button" id="Reset">Reset</button>
+
+    <table id="BanCo">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
+</body>
+</html>

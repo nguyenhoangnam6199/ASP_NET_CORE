@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hoàng Nam</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(":text, :password, textarea").css({
+                "width": "350px",
+                "border":"1px dotted red"
+            });
+
+            $(":button, :reset, :submit").css({
+                "width": "80px",
+                "height": "25px",
+                "color":"red",
+                "font-weight":"bold"
+            });
+        });
+    </script>
+</head>
+<body>
+    Họ và tên :
+    <input type="text" value="" />
+    <br />
+    <br />
+    Mật khẩu :
+    <input type="password" value="" />
+    <br />
+    <br />
+    Giới tính :
+    <input type="radio" name="GT" />Nam
+    <input type="radio" name="GT" />Nữ
+    <br />
+    <br />
+    Sở thích :
+    <input type="checkbox" value="" />Đọc sách
+    <input type="checkbox" value="" />Du lịch
+    <input type="checkbox" value="" />Thể thao
+    <input type="checkbox" value="" />Âm nhạc
+    <br />
+    <br />
+    Quốc tịch :
+    <select>
+        <option>Việt Nam</option>
+        <option>USA</option>
+        <option>Hàn Quốc</option>
+    </select>
+    <br />
+    <br />
+    Hình ảnh :
+    <label style="border: 1px solid; width: 50px; margin-right: 10px"> Choose File   </label>       
+          No file chosen
+    <br />
+    <br />
+    Ghi chú :
+    <textarea></textarea>
+    <br />
+    <br />
+    <input type="button" name="" value="Button" />
+    <input type="reset" name="" value="Reset" />
+    <input type="submit" name="" value="Submit" />
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hoàng Nam</title>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+
+    <script>
+        console.log(5 == 5);
+        console.log(5 + 5);
+        console.log("Hello");
+        //alert("Hello Nam");
+
+        $(document).ready(function () {
+            console.log("Finish render HTML");
+
+            //hơ chuột lên thẻ H1
+            $("h1").hover(function () {
+                $(this).css({
+                    "color": "red",
+                })
+            });
+
+            $("h1").mouseout(function () {
+                console.log("Mouseout")
+                $(this).css({
+                    "color": "blue"
+                });
+                //Đơn vị của hide là mili giây
+                $(this).hide(2000);
+            });
+
+            $("h1").each(function (idx, elm) {
+                console.log("Phần tử thứ " + idx);
+                console.log(elm);
+                if (elm.innerHTML == "HTML") {
+                    //break;
+                }
+            });
+
+            $("button").click(function (e) {
+                //Bỏ sự kiện Default
+                e.preventDefault();
+                let width = $("#ketqua").attr("width");
+                $("#ketqua").append(width);
+
+                let xyz = $("#ketqua").data("xyz");
+                let xyz1 = $("#ketqua").attr("xyz");
+
+                $("#ketqua").append(xyz);
+                $("#ketqua").append(xyz1);
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <form><button>Demo</button></form>
+    <div id="ketqua" data-xyz="a" width="100"></div>
+    <h1>HTML</h1>
+    <h1>CSS</h1>
+    <h1>jQuery</h1>
+    <h1>Bootstrap 4</h1>
+</body>
+</html>

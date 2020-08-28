@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hoàng Nam</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("input[type=button]").click(function () {
+                //Lấy nội dung thẻ lblFrom
+                var nd = $(".lblFrom").html();
+                //Thiết lập nội dung cho thẻ lblTo
+                $(".lblTo").html(nd);
+
+                //Lấy thuộc tính @value của thẻ input có id = txtFrom
+                var value = $("#txtFrom").attr("value");
+                //Thiết lập giá trị thuộc tính @value của thẻ input có id = "txtTo"
+                $("#txtTo").attr("value", value);
+                //Thay đổi thuộc tính css của thẻ input#txtTo và  label.lblTo
+                $("#txtTo, .lblTo").css({
+                    "color": "red",
+                    "background-color":"yellow"
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <label class="lblFrom">From</label>
+    <input id="txtFrom" type="text" value="Nhất Nghệ"/>
+    <hr />
+    <input type="button" value=">>"/>
+    <hr />
+    <label class="lblTo">To</label>
+    <input id="txtTo" type="text" value=""/>
+</body>
+</html>
