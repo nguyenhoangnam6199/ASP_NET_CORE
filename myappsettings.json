@@ -1,0 +1,14 @@
+﻿{
+  // "Key" : Data
+  "ConnectionStrings": {
+    "Database1": "Data Source=DESKTOP-7KQC0UG\\NAMPC;Initial Catalog=eStore20;Integrated Security=True"
+  },
+
+  "Ten": "Nhất Nghệ",
+  "NamThanhLap": 2003,
+  "KhoaHoc": {
+    "Cisco": "CCNA",
+    "MS": [ "MCSA", "MCSE", "MCP" ],
+    "Active": true
+  }
+}
