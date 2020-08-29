@@ -40,7 +40,7 @@ namespace Buoi10_Validation_Layout.Controllers
         public IActionResult Register()
         {
             var rd = new Random();
-            var pattern = @"0123456789cjdfjgfgfgfnbfnvkfnvnsdsjf";
+            var pattern = @"0123456789ZXCVBNMASDFGHJKLQWERTYUIOP";
             // var rdCode = rd.Next(1000, 10000).ToString();
             //StringBuilder dùng để cộng các chuỗi lại với nhau, không nên dùng (string + string)
             var rdCode = new StringBuilder();
