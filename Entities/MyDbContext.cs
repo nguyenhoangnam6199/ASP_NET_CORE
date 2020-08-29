@@ -15,5 +15,7 @@ namespace Buoi16_ASP_EFCore.Entities
         public MyDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        //Demo
     }
 }
