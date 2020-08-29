@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "ShowProduct";
+    Layout = "_FrontEnd";
+}
+
+<h1>ShowProduct</h1>
+
+@section LeftSection{ 
+    @await Html.PartialAsync("_Category", new string[] { "Bia", "Kẹo", "Nước Ngọt" })
+    <div class="cart">
+        <div class="cart-header bg-primary">Mới</div>
+        <div class="cart-body p-0">
+            <a class="list-group-item">Nước Ngọt</a>
+            <a class="list-group-item">Kẹo</a>
+        </div>
+    </div>
+}

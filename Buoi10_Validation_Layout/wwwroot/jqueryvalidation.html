@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/jquery-validation/dist/jquery.validate.js"></script>
+
+    <style>
+        .error{
+            color: red
+        }
+    </style>
+</head>
+<body>
+    <form action="/Home/Demo" id="myform">
+        Tên :  <input name="HoTen" /><br />
+        <br />
+        Tuổi: <input name="Tuoi" /><br />
+        <br />
+        <button>Gửi</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $("#myform").validate({
+                rules: {
+                    HoTen: {
+                        required: true,
+                        minlength: 5
+                    },
+                    Tuoi: {
+                        required: true,
+                        digits: true,
+                        range: [16, 60]
+                    }
+                },
+                messages: {
+                    HoTen: {
+                        required: "Không được để trống !",
+                        minlength:"Ít nhất 5 kí tự !"
+                    },
+                    Tuoi: {
+                        required: "Không được để trống !",
+                        digits: "Phải là số nguyên !",
+                        range: "Chưa đúng định dạng !"
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

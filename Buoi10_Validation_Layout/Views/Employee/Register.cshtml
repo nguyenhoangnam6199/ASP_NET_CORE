@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<form id="formDangKy">
+    <h2 class="text-center text-danger">
+        Đăng ký Thành viên
+    </h2>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Mã sinh viên</div>
+        <div class="col-8 col-md-9">
+            <input name="MaSV" placeholder="Mã sinh viên" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Họ tên</div>
+        <div class="col-8 col-md-9">
+            <input name="HoTen" placeholder="Họ tên Sinh viên" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Ngày sinh</div>
+        <div class="col-8 col-md-9">
+            <input name="NgaySinh" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Email</div>
+        <div class="col-8 col-md-9">
+            <input name="Email" placeholder="Email" class="w-100" id="txtEmail" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Xác nhận email</div>
+        <div class="col-8 col-md-9">
+            <input name="XacNhanEmail" placeholder="Xác nhận email" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Số điện thoại</div>
+        <div class="col-8 col-md-9">
+            <input name="SoDienThoai" placeholder="Số điện thoại" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Số tài khoản</div>
+        <div class="col-8 col-md-9">
+            <input name="SoTaiKhoan" placeholder="Số tài khoản" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Hình</div>
+        <div class="col-8 col-md-9">
+            <input type="file" name="Hinh" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Điểm</div>
+        <div class="col-8 col-md-9">
+            <input name="Diem" placeholder="Điểm" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Hệ số</div>
+        <div class="col-8 col-md-9">
+            <input name="HeSo" placeholder="Hệ số" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Mã bảo mật</div>
+        <div class="col-8 col-md-9">
+            <span></span>
+            <input name="MaBaoMat" placeholder="Mã bảo mật" class="w-75 security-code" /> 
+            <span class="text-danger">@ViewBag.RandomCode</span>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Thông tin thêm</div>
+        <div class="col-8 col-md-9">
+            <textarea name="ThongTinThem" class="w-100"></textarea>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right"></div>
+        <div class="col-8 col-md-9">
+            <button class="btn btn-success">Đăng ký</button>
+            <button class="btn btn-danger" type="reset">Nhập lại</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+
+    <style>
+        label.error {
+            color: red;
+        }
+
+        input.error {
+            background: yellow;
+        } 
+    </style>
+    <script>
+
+        // Định nghĩa thuộc tính kiểm tra
+        //B1: Định nghĩa hàm kiểm tra
+        function KiemTraGmail(value, element) {
+            @*sử dụng 2 dấu @ để viết định nghĩa đuôi @gmail.com*@
+            let pattern = /^[a-z]\w*@@gmail.com$/;
+            //Kiểm tra lỗi rồi return kết quả
+            return this.optional(element) || pattern.test(value);
+        }
+        $.validator.addMethod("gmail", KiemTraGmail, "Không đúng định dạng gmail !");
+
+        //Hàm kiểm tra số điện thoại
+        function KiemTraSDT(value, element) {
+            let pattern = /^(0[35789][0-9]{8}|02[5789][0-9]{8})$/g;
+            return this.optional(element) || pattern.test(value);
+        }
+        $.validator.addMethod("sdt", KiemTraSDT, "Không đúng định dạng số điện thoại !");
+        //B2: Đăng kí vào validation
+        //addMethod(Tên định dạng, Tên hàm, Thông báo)
+      
+
+       
+        //end
+
+        $(document).ready(function () {
+            $("#formDangKy").validate({
+                rules:
+                {
+                    MaSV: {
+                        required: true,
+                        minlength: 5
+                    },
+                    HoTen: { required: true },
+                    NgaySinh: {
+                        date: true,
+                        required: true
+                    },
+                    Email: {required: true, email: true, gmail:true},
+                    XacNhanEmail: { equalTo: 'input[name="Email"]' },
+                    SoDienThoai: {sdt: true },
+                    SoTaiKhoan: {
+                        creditcard: true
+                    },
+                    Hinh: {
+                        extension: "png|jpg|gif|jpeg",
+                        required: true 
+                    },
+                    Diem: { number: true, range: [0, 10], required: true},
+                    HeSo: { digits: true, min: 1, required: true},
+                    MaBaoMat: { remote:"/Employee/CheckSecurityCode", required: true},
+                    ThongTinThem: {required: true}
+
+                },
+                messages: {
+                    //MaSV: {required:"*", minlength:"Ít nhất 5 kí tự !"}
+                },
+                errorPlacement: function (error, element) {
+                    if ($(element).hasClass("security-code")) {
+                        $(element).next().after(error);
+                    }
+                    else {
+                        error.insertAfter(element);
+                    }
+                    
+                }
+            });
+
+        });
+    </script>
+}
