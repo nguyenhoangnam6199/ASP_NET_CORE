@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Buoi7_ASP.Models.HangHoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenHh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soluong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonGia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenHh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soluong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonGia)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaHh" class="btn btn-primary">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaHh" class="btn btn-danger delete-item">Xóa</a>
+                    <a asp-action="Detail" asp-route-id="@item.MaHh" class="btn btn-success">Chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+
+
+    <script>
+        $(function () {
+            $(".delete-item").click(function (e) {
+                let trl = confirm("Bạn có muốn xóa không ?");
+                if (!trl) {
+                    e.preventDefault();
+                }
+                
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                            'Deleted!',
+                            'success'
+                        )
+                    }
+                })
+             
+            })
+        });
+    </script>
+}

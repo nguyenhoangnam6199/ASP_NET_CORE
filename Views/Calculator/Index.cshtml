@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Máy tính cá nhân</h1>
+
+<form asp-action="Calculate">
+    <table class="table table-primary table-striped">
+        <tr>
+            <td>Số thứ nhất</td>
+            <td>Phép toán</td>
+            <td>Số thứ hai</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td><input name="SoThuNhat" placeholder="SoThuNhat" value="@ViewBag.A" /></td>
+            <td>
+                <select name="PhepToan">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                    <option value="%">%</option>
+                    <option value="^">^</option>
+                </select>
+            </td>
+            <td><input name="SoThuHai" placeholder="SoThuHai" value="@ViewBag.B" /></td>
+            <td><button>Tính</button></td>
+            <td>
+                <input name="ketqua" placeholder="KetQua" class="disabled" readonly value="@ViewBag.KetQua" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@*Để trong thẻ @section Scripts{ } để tránh câu lệnh script nằm trước đường dẫn thư viên*@
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            let phepToanChon = "@ViewBag.PhepToan";
+            if (phepToanChon.length > 0) {
+                $("select[name='PhepToan']").val(phepToanChon);
+            }
+
+    })
+    </script>
+}
+
+
