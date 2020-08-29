@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Hoàng Nam";
+}
+
+<div class="text-center">
+
+        <div>Đang có @HangHoa.Dem hàng hóa</div>
+
+        @{
+
+            var hh = new HangHoa
+            {
+                TenHh = "Gạo",
+                DonGia = 1000,
+                SoLuong = 2
+            };
+
+            <div>Đang có @HangHoa.Dem hàng hóa</div>
+
+            //C2
+            var hh1 = new HangHoa();
+            hh1.TenHh = "Kẹo";
+            hh1.DonGia = 150;
+            hh1.SoLuong = 2;
+            <div>Đang có @HangHoa.Dem hàng hóa</div>
+
+            //C3: Sử dụng hàm tạo
+            var hh2 = new HangHoa("Mì", 500, 15);
+            <div>Đang có @HangHoa.Dem hàng hóa</div>
+
+            List<HangHoa> dsHangHoa = new List<HangHoa>();
+            dsHangHoa.Add(hh);
+            dsHangHoa.Add(hh1);
+            dsHangHoa.Add(hh2);
+
+
+        }
+
+        @foreach (var item in dsHangHoa)
+        {
+            <h3>@item.TenHh - @item.DonGia - @item.SoLuong</h3>
+            <h4>@item.In()</h4>
+            @*<h4>@item</h4>
+            <h4>@item.ToString()</h4>*@
+        }
+
+        <h3>@hh.TenHh - @hh.DonGia</h3>
+        @if (hh.ConHang)
+        {
+            <div>Còn @hh.SoLuong @hh.TenHh</div>
+        }
+        else
+        {
+            <div>@hh.TenHh: Sắp hết hàng</div>
+        }
+    </div>

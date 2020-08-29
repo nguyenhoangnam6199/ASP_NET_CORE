@@ -1,0 +1,15 @@
+﻿@using Buoi6_ASP.Models;
+
+@{
+    ViewData["Title"] = "Demo";
+}
+
+@{ 
+    var now = DateTime.Now;
+    var veso = "XYZ".Vietlotte(true);
+}
+
+<div>Còn @now.ToiTet() ngày nữa mới đến Tết.</div>
+
+<div>@veso</div>
+
