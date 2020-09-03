@@ -58,7 +58,7 @@ namespace Buoi22_WebAPI.Controllers
             var tokenInfo = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(20),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes),
                     SecurityAlgorithms.HmacSha256)
             };
@@ -76,6 +76,7 @@ namespace Buoi22_WebAPI.Controllers
 
         // GET: api/KhachHang
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<KhachHang>>> GetKhachHang()
         {
             return await _context.KhachHang.ToListAsync();
