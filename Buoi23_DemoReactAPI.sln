@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buoi23_DemoReactAPI", "Buoi23_DemoReactAPI.csproj", "{253EA6B1-32C3-4422-BC71-0D5FAB9EADBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{253EA6B1-32C3-4422-BC71-0D5FAB9EADBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{253EA6B1-32C3-4422-BC71-0D5FAB9EADBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{253EA6B1-32C3-4422-BC71-0D5FAB9EADBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{253EA6B1-32C3-4422-BC71-0D5FAB9EADBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9BFB9474-404B-4C6F-8CDB-401D2AC3E366}
+	EndGlobalSection
+EndGlobal
