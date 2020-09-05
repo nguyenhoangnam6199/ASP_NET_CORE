@@ -88,40 +88,40 @@ namespace Buoi17_18_19_EFCore_CRUD_AJAX.Controllers
         }
         #endregion
 
-        //#region [LoadMore]
-        //[HttpGet]
-        //public IActionResult LoadMore()
-        //{
-        //    return View();
-        //}
+        #region [LoadMore]
+        [HttpGet]
+        public IActionResult LoadMore()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public IActionResult LoadMore(int page = 1)
-        //{
-        //    var data = _context.HangHoa.AsQueryable();
-        //    var rs = data.Skip((page - 1) * ITEMS_PER_PAGE).Take(ITEMS_PER_PAGE)
-        //        .Select(hh => new
-        //        {
-        //            hh.MaHh,
-        //            hh.TenHh,
-        //            hh.Hinh,
-        //            DonGia = hh.DonGia.Value
-        //        });
+        [HttpPost]
+        public IActionResult LoadMore(int page = 1)
+        {
+            var data = _context.HangHoa.AsQueryable();
+            var rs = data.Skip((page - 1) * ITEMS_PER_PAGE).Take(ITEMS_PER_PAGE)
+                .Select(hh => new
+                {
+                    hh.MaHh,
+                    hh.TenHh,
+                    hh.Hinh,
+                    DonGia = hh.DonGia.Value
+                });
 
-        //    var total = data.Count();
-        //    var pageCount = Convert.ToInt32(Math.Ceiling(1.0 * total / ITEMS_PER_PAGE));
+            var total = data.Count();
+            var pageCount = Convert.ToInt32(Math.Ceiling(1.0 * total / ITEMS_PER_PAGE));
 
-        //    return Json(new
-        //    {
-        //        data = rs,
-        //        paging = new
-        //        {
-        //            total = total,
-        //            totalPage = pageCount,
-        //            currentpage = page
-        //        }
-        //    });
-        //}
-        //#endregion
+            return Json(new
+            {
+                data = rs,
+                paging = new
+                {
+                    total = total,
+                    totalPage = pageCount,
+                    currentpage = page
+                }
+            });
+        }
+        #endregion
     }
 }
