@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,10 @@ namespace DoAn.Data
         public virtual ICollection<HangHoaTag> HangHoaTags { get; set; }
 
         public virtual ICollection<HinhPhu> HinhPhus { get; set; }
+
+        public virtual ICollection<ReviewHangHoa> ReviewHangHoas { get; set; }
+
+        public double? DiemReview { get; set; }
     }
 
     public class ReviewHangHoa
@@ -31,7 +36,11 @@ namespace DoAn.Data
         public DateTime NgayReview { get; set; }
         public byte DiemReview { get; set; }
         public int TieuChi { get; set; }
-        public Guid? MaHangHoa { get; set; }
+        public Guid MaHangHoa { get; set; }
+
+        [ForeignKey("TieuChi")]
+        public Review Review { get; set; }
+        [ForeignKey("MaHangHoa")]
         public HangHoa HangHoa { get; set; }
     }
 
@@ -40,6 +49,8 @@ namespace DoAn.Data
         public int Id { get; set; }
         public string Criteria { get; set; }
         public bool Active { get; set; }
+
+        public virtual ICollection<ReviewHangHoa> ReviewHangHoas { get; set; }
     }
 
     public class HinhPhu

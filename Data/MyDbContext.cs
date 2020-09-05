@@ -15,6 +15,9 @@ namespace DoAn.Data
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<HinhPhu> HinhPhus { get; set; }
+
+        public DbSet<ReviewHangHoa> ReviewHangHoas { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
