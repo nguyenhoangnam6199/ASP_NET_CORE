@@ -13,6 +13,8 @@ namespace DoAn.Data
         public DbSet<HangHoa> HangHoas { get; set; }
         public DbSet<HangHoaTag> HangHoaTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<HinhPhu> HinhPhus { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,6 +57,11 @@ namespace DoAn.Data
                     .HasMaxLength(100);
                 entity.HasKey(l => l.MaLoai);
                 
+            });
+
+            modelBuilder.Entity<HinhPhu>(e =>
+            {
+                e.HasOne(hh => hh.HangHoa).WithMany(hh => hh.HinhPhus).HasForeignKey(h => h.MaHangHoa);
             });
 
         }

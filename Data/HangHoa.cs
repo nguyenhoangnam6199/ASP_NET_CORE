@@ -25,11 +25,30 @@ namespace DoAn.Data
         public virtual ICollection<HinhPhu> HinhPhus { get; set; }
     }
 
+    public class ReviewHangHoa
+    {
+        public Guid Id { get; set; }
+        public DateTime NgayReview { get; set; }
+        public byte DiemReview { get; set; }
+        public int TieuChi { get; set; }
+        public Guid? MaHangHoa { get; set; }
+        public HangHoa HangHoa { get; set; }
+    }
+
+    public class Review
+    {
+        public int Id { get; set; }
+        public string Criteria { get; set; }
+        public bool Active { get; set; }
+    }
+
     public class HinhPhu
     {
         public Guid Id { get; set; }
         public string Url { get; set; }
         public bool Active { get; set; }
+
+        public Guid MaHangHoa { get; set; }
         public HangHoa HangHoa { get; set; }
     }
 
