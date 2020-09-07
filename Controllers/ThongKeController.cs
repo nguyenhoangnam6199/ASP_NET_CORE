@@ -22,6 +22,23 @@ namespace Buoi17_18_19_EFCore_CRUD_AJAX.Controllers
             return View();
         }
 
+        #region Biểu đồ
+        public IActionResult BieuDoTheoLoai()
+        {
+            var data = _context.ChiTietHd.GroupBy(cthd => cthd.MaHhNavigation.MaLoaiNavigation.TenLoai)
+                .Select(g => new LoaiThongKe
+                {
+                    Loai = g.Key,
+                    DoanhThu = g.Sum(cthd => cthd.SoLuong * cthd.DonGia * (1 - cthd.GiamGia)),
+                    SoHH = g.Sum(cthd => cthd.SoLuong),
+                    GiaNN = g.Min(cthd => cthd.DonGia),
+                    GiaCN = g.Max(cthd => cthd.DonGia),
+                    GiaTB = g.Average(cthd => cthd.DonGia)
+                }).ToList();
+            return View(data);
+        }
+        #endregion
+
         #region Thống kê
         public IActionResult LoaiThongKe()
         {

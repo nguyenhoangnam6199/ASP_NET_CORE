@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.LoaiThongKe> 
+
+@{
+    ViewData["Title"] = "BieuDoTheoLoai";
+    var dsTenLoai = Model.Select(lo => lo.Loai).ToList();
+    var dsDoanhThu = Model.Select(lo => lo.DoanhThu).ToList();
+}
+
+<h1>Biểu đồ</h1>
+
+<canvas id="pie-chart" width="700" height="350"></canvas>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            new Chart(document.getElementById("pie-chart"), {
+                type: 'pie',
+                data: {
+                    //labels: ['Mỹ', 'Úc', 'Nhật'],
+                    labels:['@Html.Raw(string.Join("', '", dsTenLoai))'],
+                    datasets: [{
+                       // label: "Doanh Thu (VND)",
+                        backgroundColor: ["#FF1493", "#FF00FF", "#FF0000", "#FFA500", "#FFFF00", "#32CD32", "#7FFFD4","#8B4513"],
+                        //data: [2478, 5267, 734]
+                        data: [@string.Join(", ", dsDoanhThu)]
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Doanh Thu Theo Loại (VND)'
+                    }
+                }
+            });
+        });
+    </script>
+}
+
