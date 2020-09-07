@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Buoi17_18_19_EFCore_CRUD_AJAX.Entities;
+using Buoi17_18_19_EFCore_CRUD_AJAX.Helpers;
+using Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Buoi17_18_19_EFCore_CRUD_AJAX.Entities;
-using Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Buoi17_18_19_EFCore_CRUD_AJAX.Helpers;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore.Query.Internal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Buoi17_18_19_EFCore_CRUD_AJAX.Controllers
 {
@@ -58,23 +57,24 @@ namespace Buoi17_18_19_EFCore_CRUD_AJAX.Controllers
         [HttpPost]
         public IActionResult TimKiem(string TuKhoa, double? GiaTu, double? GiaDen)
         {
-            var dshh =_context.HangHoa.AsQueryable();
+            var dshh = _context.HangHoa.AsQueryable();
             if (!string.IsNullOrEmpty(TuKhoa))
             {
                 dshh = dshh.Where(hh => hh.TenHh.Contains(TuKhoa));
             }
-            if(GiaTu.HasValue && GiaDen.HasValue)
+            if (GiaTu.HasValue && GiaDen.HasValue)
             {
                 dshh = dshh.Where(hh => hh.DonGia.Value >= GiaTu && hh.DonGia.Value <= GiaDen);
             }
 
-            var data =_mapper.Map<List<HangHoaTimKiem>>(dshh.Select(hh=> new HangHoaTimKiem { 
+            var data = _mapper.Map<List<HangHoaTimKiem>>(dshh.Select(hh => new HangHoaTimKiem
+            {
                 MaHh = hh.MaHh,
                 TenHh = hh.TenHh,
                 DonGia = hh.DonGia.Value,
-                GiamGia=hh.GiamGia,
-                NgaySanXuat=hh.NgaySx,
-                Loai=hh.MaLoaiNavigation.TenLoai
+                GiamGia = hh.GiamGia,
+                NgaySanXuat = hh.NgaySx,
+                Loai = hh.MaLoaiNavigation.TenLoai
             }).ToList());
             return View(data);
 
@@ -134,7 +134,7 @@ namespace Buoi17_18_19_EFCore_CRUD_AJAX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHh,TenHh,MaLoai,MoTaDonVi,DonGia,NgaySx,GiamGia,SoLanXem,MoTa,MaNcc")] HangHoa hangHoa,IFormFile Hinh)
+        public async Task<IActionResult> Create([Bind("MaHh,TenHh,MaLoai,MoTaDonVi,DonGia,NgaySx,GiamGia,SoLanXem,MoTa,MaNcc")] HangHoa hangHoa, IFormFile Hinh)
         {
             if (ModelState.IsValid)
             {
@@ -183,7 +183,7 @@ namespace Buoi17_18_19_EFCore_CRUD_AJAX.Controllers
             {
                 try
                 {
-                    if(myFile != null)
+                    if (myFile != null)
                     {
                         hangHoa.Hinh = FileHelper.UpLoadFileToFolder(myFile, "HangHoa");
                     }
