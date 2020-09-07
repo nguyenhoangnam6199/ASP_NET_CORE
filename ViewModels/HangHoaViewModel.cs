@@ -9,6 +9,7 @@ namespace Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels
     public class HangHoaViewModel
     {
         [Display(Name = "Mã")]
+        [Required(ErrorMessage ="Tên hàng hóa không được trống !")]
         public int MaHh { get; set; }
         [Display(Name = "Tên hàng hóa")]
         public string TenHh { get; set; }

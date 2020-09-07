@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.KhachHangThongKe>
+
+@{
+    ViewData["Title"] = "KhachHangThongKe";
+}
+
+<h1>Doanh số theo khách hàng</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr class="bg-primary text-center">
+            <th>
+                @Html.DisplayNameFor(model => model.TenKh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoHhDaMua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaCN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaTB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoHhDaMua)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaNN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaCN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
