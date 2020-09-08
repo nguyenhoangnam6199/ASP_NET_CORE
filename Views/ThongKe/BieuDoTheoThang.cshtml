@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.ThangThongKe>
+
+@{
+    ViewData["Title"] = "BieuDoTheoThang";
+    var dsThang = Model.Select(t => t.Thang).ToList();
+    var dsdoanhThu = Model.Select(t => t.DoanhThu).ToList();
+}
+
+<h1>Biểu đồ doanh thu theo tháng</h1>
+
+<canvas id="myChart"></canvas>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels:['@Html.Raw(string.Join("', '", dsThang))'],
+                datasets: [{
+                    label: 'Doanh thu', // Name the series
+                    data: [@string.Join(", ", dsdoanhThu)], // Specify the data values array
+                    fill: false,
+                    borderColor: '#2196f3', // Add custom color border (Line)
+                    backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                    borderWidth: 1 // Specify bar border width
+                }]
+            },
+            options: {
+                responsive: true, // Instruct chart js to respond nicely.
+                maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+            }
+        });
+    </script>
+}
+

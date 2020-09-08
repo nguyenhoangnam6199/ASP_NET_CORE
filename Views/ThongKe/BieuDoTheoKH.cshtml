@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Buoi17_18_19_EFCore_CRUD_AJAX.ViewModels.KhachHangThongKe>
+
+@{
+    ViewData["Title"] = "BieuDoTheoKH";
+    var dsTenKH = Model.Select(kh => kh.TenKh).ToList();
+    var dsdoanhThu = Model.Select(kh => kh.TongTien).ToList();
+}
+
+<h1>Biểu đồ doanh thu theo khách hàng</h1>
+
+<canvas id="myChart"></canvas>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:['@Html.Raw(string.Join("', '", dsTenKH))'],
+                datasets: [{
+                    label: 'Doanh thu', // Name the series
+                    data: [@string.Join(", ", dsdoanhThu)], // Specify the data values array
+                    backgroundColor: "rgba(153,255,51,1)", // Add custom color background (Points and Fill)
+                }]
+            },
+        });
+    </script>
+}
+
