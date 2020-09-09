@@ -110,9 +110,6 @@ namespace DoAn.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("LoaiChaMaLoai")
-                        .HasColumnType("int");
-
                     b.Property<int?>("MaLoaiCha")
                         .HasColumnType("int");
 
@@ -126,7 +123,7 @@ namespace DoAn.Migrations
 
                     b.HasKey("MaLoai");
 
-                    b.HasIndex("LoaiChaMaLoai");
+                    b.HasIndex("MaLoaiCha");
 
                     b.ToTable("Loai");
                 });
@@ -226,7 +223,7 @@ namespace DoAn.Migrations
                 {
                     b.HasOne("DoAn.Data.Loai", "LoaiCha")
                         .WithMany()
-                        .HasForeignKey("LoaiChaMaLoai");
+                        .HasForeignKey("MaLoaiCha");
                 });
 
             modelBuilder.Entity("DoAn.Data.ReviewHangHoa", b =>

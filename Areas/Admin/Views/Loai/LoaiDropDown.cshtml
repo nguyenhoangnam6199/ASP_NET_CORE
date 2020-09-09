@@ -1,0 +1,23 @@
+﻿@model DoAn.ViewModels.LoaiDropDown
+
+
+<select class="form-control" name="@Model.ControllName" id="@Model.ControllName">
+    <option>------Chọn------</option>
+    @{ 
+        var allLoai = Model.Items.ToList();
+        var level1 = Model.Items.Where(p => p.MaLoaiCha == null);
+    }
+    @foreach(var x in level1)
+    {
+        var level2 = allLoai.Where(p => p.MaLoai == x.MaLoai).ToList();
+        <option value="@x">@x.TenLoai</option>
+        @foreach(var lv2 in level2)
+        {
+            <option value="@lv2.MaLoai">
+                |_____@lv2.TenLoai
+            </option>
+        }
+    }
+
+</select>
+
