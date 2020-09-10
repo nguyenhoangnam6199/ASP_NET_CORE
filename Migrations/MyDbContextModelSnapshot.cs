@@ -27,8 +27,7 @@ namespace DoAn.Migrations
                         .HasDefaultValueSql("newid()");
 
                     b.Property<string>("ChiTiet")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("DiemReview")
                         .HasColumnType("float");
@@ -46,7 +45,8 @@ namespace DoAn.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("MoTa")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");

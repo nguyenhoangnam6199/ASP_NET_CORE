@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Data;
+using Microsoft.AspNetCore.Http;
+using DoAn.Helpers;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -57,11 +59,13 @@ namespace DoAn.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHangHoa,TenHangHoa,DonGia,GiamGia,SoLuong,Hinh,ChiTiet,MoTa,MaLoai,DiemReview")] HangHoa hangHoa)
+        public async Task<IActionResult> Create([Bind("MaHangHoa,TenHangHoa,DonGia,GiamGia,SoLuong,ChiTiet,MoTa,MaLoai,DiemReview")] HangHoa hangHoa,
+                IFormFile hinh)
         {
             if (ModelState.IsValid)
             {
                 hangHoa.MaHangHoa = Guid.NewGuid();
+                hangHoa.Hinh = FileHelper.UpLoadFileToFolder(hinh, "HangHoa");
                 _context.Add(hangHoa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,7 +96,8 @@ namespace DoAn.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("MaHangHoa,TenHangHoa,DonGia,GiamGia,SoLuong,Hinh,ChiTiet,MoTa,MaLoai,DiemReview")] HangHoa hangHoa)
+        public async Task<IActionResult> Edit(Guid id, [Bind("MaHangHoa,TenHangHoa,DonGia,GiamGia,SoLuong,Hinh,ChiTiet,MoTa,MaLoai,DiemReview")] HangHoa hangHoa,
+            IFormFile myFile)
         {
             if (id != hangHoa.MaHangHoa)
             {
@@ -103,6 +108,10 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (myFile != null)
+                    {
+                        hangHoa.Hinh = FileHelper.UpLoadFileToFolder(myFile, "HangHoa");
+                    }
                     _context.Update(hangHoa);
                     await _context.SaveChangesAsync();
                 }

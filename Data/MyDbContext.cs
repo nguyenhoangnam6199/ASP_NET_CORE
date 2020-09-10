@@ -28,7 +28,7 @@ namespace DoAn.Data
                 e.HasKey(hh => hh.MaHangHoa);
                 e.Property(hh => hh.MaHangHoa).HasDefaultValueSql("newid()");   //HasDefault("0");
                 e.Property(hh => hh.TenHangHoa).IsRequired().HasMaxLength(100);
-                e.Property(hh => hh.ChiTiet).HasMaxLength(200);
+                e.Property(hh => hh.MoTa).HasMaxLength(200);
                 e.HasIndex(hh => hh.TenHangHoa).IsUnique();
                 e.HasOne(l => l.Loai).WithMany(lo => lo.HangHoas).HasForeignKey(hh => hh.MaLoai)
                 .OnDelete(DeleteBehavior.SetNull);

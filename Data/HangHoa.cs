@@ -25,8 +25,8 @@ namespace DoAn.Data
         public string ChiTiet { get; set; }
         [Display(Name = "Mô tả")]
         public string MoTa { get; set; }
-        
 
+        [Display(Name = "Loại")]
         public int? MaLoai { get; set; }
         [Display(Name = "Loại")]
         public Loai Loai { get; set; }
