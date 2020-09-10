@@ -47,8 +47,8 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Loai/Create
         public IActionResult Create()
         {
-            //ViewBag.LoaiCha = new SelectList(_context.Loais.ToList(), "MaLoai", "TenLoai");
-            ViewBag.LoaiCha = new LoaiDropDown(_context.Loais, "MaLoai", "TenLoai", "MaLoaiCha");
+            ViewBag.LoaiCha = new SelectList(_context.Loais.ToList(), "MaLoai", "TenLoai");
+            //ViewBag.LoaiCha = new LoaiDropDown(_context.Loais, "MaLoai", "TenLoai", "MaLoaiCha");
             return View();
         }
 
@@ -81,6 +81,7 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewBag.LoaiCha = new SelectList(_context.Loais, "MaLoai", "TenLoai");
             return View(loai);
         }
 
@@ -114,6 +115,7 @@ namespace DoAn.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                ViewBag.LoaiCha = new SelectList(_context.Loais, "MaLoai", "TenLoai");
                 return RedirectToAction(nameof(Index));
             }
             return View(loai);

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,6 +55,7 @@ namespace DoAn
 
             app.UseEndpoints(endpoints =>
             {
+                //Khi tạo areas thì cần add thêm lệnh này vô
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

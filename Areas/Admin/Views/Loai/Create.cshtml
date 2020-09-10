@@ -21,11 +21,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="MaLoaiCha" class="control-label"></label>
-                @*<select asp-for="MaLoaiCha" class="form-control" asp-items="@ViewBag.LoaiCha">
+                <select asp-for="MaLoaiCha" class="form-control" asp-items="@ViewBag.LoaiCha">
                         <option value="">---------Chọn------------</option>
-                    </select>*@
+                    </select>
+
+                @*Cách 2 Nếu muốn sử dụng dropdown list
                 @await Html.PartialAsync("LoaiDropDown", ViewBag.LoaiCha as LoaiDropDown)
-                <span asp-validation-for="MaLoaiCha" class="text-danger"></span>
+                <span asp-validation-for="MaLoaiCha" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

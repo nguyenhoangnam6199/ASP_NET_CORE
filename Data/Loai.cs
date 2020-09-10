@@ -18,8 +18,8 @@ namespace DoAn.Data
         [Display(Name = "Mã loại cha")]
         public int? MaLoaiCha { get; set; }
         [ForeignKey("MaLoaiCha")]
-        public Loai LoaiCha { get; set; }
+        public virtual Loai LoaiCha { get; set; }
 
-        public ICollection<HangHoa> HangHoas { get; set; }
+        public virtual ICollection<HangHoa> HangHoas { get; set; }
     }
 }
