@@ -1,17 +1,15 @@
 ﻿@model IEnumerable<DoAn.Data.HangHoa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách hàng hóa";
 }
 
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Tạo mới</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
-        <tr>
+        <tr class="bg-primary">
             <th>
                 @Html.DisplayNameFor(model => model.TenHangHoa)
             </th>
@@ -39,7 +37,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DiemReview)
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -73,9 +71,9 @@
                 @Html.DisplayFor(modelItem => item.DiemReview)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaHangHoa">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaHangHoa">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaHangHoa">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MaHangHoa" class="btn btn-primary">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.MaHangHoa" class="btn btn-info">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.MaHangHoa" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }
