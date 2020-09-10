@@ -40,7 +40,6 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             return View(loai);
         }
 
@@ -48,7 +47,7 @@ namespace DoAn.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.LoaiCha = new SelectList(_context.Loais.ToList(), "MaLoai", "TenLoai");
-            //ViewBag.LoaiCha = new LoaiDropDown(_context.Loais, "MaLoai", "TenLoai", "MaLoaiCha");
+           // ViewBag.LoaiCha = new LoaiDropDown(_context.Loais, "MaLoai", "TenLoai", "MaLoaiCha");
             return View();
         }
 
