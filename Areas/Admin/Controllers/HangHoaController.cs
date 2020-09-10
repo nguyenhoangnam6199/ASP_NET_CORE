@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DoAn.Data;
 using Microsoft.AspNetCore.Http;
 using DoAn.Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace DoAn.Areas.Admin.Controllers
     public class HangHoaController : Controller
     {
         private readonly MyDbContext _context;
+        private readonly ILogger _logger;
 
-        public HangHoaController(MyDbContext context)
+        public HangHoaController(MyDbContext context, ILogger<HangHoaController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Admin/HangHoa
@@ -64,11 +67,22 @@ namespace DoAn.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                hangHoa.MaHangHoa = Guid.NewGuid();
-                hangHoa.Hinh = FileHelper.UpLoadFileToFolder(hinh, "HangHoa");
-                _context.Add(hangHoa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    hangHoa.MaHangHoa = Guid.NewGuid();
+                    hangHoa.Hinh = FileHelper.UpLoadFileToFolder(hinh, "HangHoa");
+                    _context.Add(hangHoa);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(Exception e)
+                {
+                    _logger.LogError(e, $"Loi: {e.Message}");
+                    ViewBag.Mesage = "Không tìm thấy file Hình";
+                    ViewData["MaLoai"] = new SelectList(_context.Loais, "MaLoai", "TenLoai", hangHoa.MaLoai);
+                    return View(hangHoa);
+                }
+               
             }
             ViewData["MaLoai"] = new SelectList(_context.Loais, "MaLoai", "TenLoai", hangHoa.MaLoai);
             return View(hangHoa);
