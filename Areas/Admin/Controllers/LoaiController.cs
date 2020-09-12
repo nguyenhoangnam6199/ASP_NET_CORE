@@ -23,7 +23,7 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Loai
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Loais.ToListAsync());
+            return View(await _context.Loais.Include(lc=>lc.LoaiCha).ToListAsync());
         }
 
         // GET: Admin/Loai/Details/5
