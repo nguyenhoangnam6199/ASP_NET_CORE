@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<DoAn.ViewModels.HangHoaVM>
 
 @{
+    var danhMuc = string.IsNullOrEmpty(ViewBag.TenDM) ? "Tất cả hàng hóa" : ViewBag.TenDM;
     ViewData["Title"] = "Danh sách hàng hóa";
     Layout = "~/Views/Shared/_Shop.cshtml";
 }
@@ -11,7 +12,7 @@
             <div class="col-main col-sm-12 col-xs-12">
                 <div class="shop-inner">
                     <div class="page-title">
-                        <h2>iPhone 6</h2>
+                        <h2>danhMuc</h2>
                     </div>
                     <div class="toolbar column">
                         <div class="sorter">
@@ -46,8 +47,10 @@
                                                 <div class="icon-sale-label sale-left">Sale</div>
                                                 <div class="icon-new-label new-right">New</div>
                                                 <div class="pr-img-area">
-                                                    <a title="Ipsums Dolors Untra" href="single_product.html">
-                                                        <figure> <img class="first-img" src="~/shop/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="~/shop/images/products/product-1.jpg" alt="HTML template"></figure>
+                                                    <a title="Ipsums Dolors Untra" asp-controller="HangHoa" asp-action="Detail" asp-route-id="@hh.MaHangHoa">
+                                                        <figure> <img class="first-img" src="~/Hinh/HangHoa/@hh.Hinh" alt="@hh.TenHangHoa"> 
+                                                        <img class="hover-img" src="~/Hinh/HangHoa/@hh.Hinh" alt="@hh.TenHangHoa">
+                                                        </figure>
                                                     </a>
                                                 </div>
                                                 <div class="pr-info-area">
@@ -64,7 +67,7 @@
                                                     <div class="item-content">
                                                         <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                                         <div class="item-price">
-                                                            <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
+                                                            <div class="price-box"> <span class="regular-price"> <span class="price">@hh.DonGia</span> </span> </div>
                                                         </div>
                                                         <div class="pro-action">
                                                             <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>

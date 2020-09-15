@@ -19,15 +19,16 @@ namespace DoAn.Controllers
         public IActionResult Index(int? MaLoai)
         {
             var data = context.HangHoas.AsQueryable();
+          
             if (MaLoai.HasValue)
             {
+                ViewBag.TenDM = context.Loais.FirstOrDefault(lo => lo.MaLoai == MaLoai.Value).TenLoai;
                 data = data.Where(hh => hh.MaLoai == MaLoai || hh.Loai.MaLoaiCha == MaLoai);
 
                 //C2: Xác đinh danh sách loại cha
                 //List<int> dsLoai = LayDanhSachLoai(MaLoai);
                 //data = data.Where(hh => dsLoai.Contains(hh.MaLoai.Value));
             }
-
             var dshangHoa = data.Select(hh => new HangHoaVM
             {
                 MaHangHoa = hh.MaHangHoa,
@@ -61,6 +62,16 @@ namespace DoAn.Controllers
                 loaiCon.Remove(obj);
                 DeQuyTimLoai(obj, ds);
             }
+        }
+
+        public IActionResult Detail(Guid id)
+        {
+            var hh = context.HangHoas.FirstOrDefault(hh => hh.MaHangHoa == id);
+            if (hh == null)
+            {
+                return RedirectToAction("Home", "NotFound");
+            }
+            return View(hh);
         }
     }
 }

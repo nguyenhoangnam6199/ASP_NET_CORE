@@ -33,5 +33,11 @@ namespace DoAn.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Route("/404")]
+        public IActionResult NotFound()
+        {
+            return View();
+        }
     }
 }
