@@ -36,10 +36,10 @@ namespace DoAn.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(Carts);
         }
 
-        public IActionResult AddToCart(Guid id)
+        public IActionResult AddToCart(Guid id,String addType ,int qty = 1)
         {
             //lấy giỏ hàng hiện tại
             var myCart = Carts;
@@ -47,17 +47,37 @@ namespace DoAn.Controllers
             var item = myCart.FirstOrDefault(item => item.MaHangHoa == id);
             if(item != null)
             {
-                item.SoLuong += 1;
+                item.SoLuong += qty;
             }
             else
             {
                 var hh = _context.HangHoas.FirstOrDefault(hh => hh.MaHangHoa == id);
                 item = _mapper.Map<CartItem>(hh);
-                item.SoLuong = 1;
+                item.SoLuong = qty;
                 myCart.Add(item);
 
             }
             HttpContext.Session.Set("GioHang", myCart);
+            if(addType == "ajax")
+            {
+                return PartialView("_CartView");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RemoveCartItem(Guid id, bool isAjaxCall = false)
+        {
+            //lấy giỏ hàng hiện tại
+            var myCart = Carts;
+            //Kiểm tra hàng đã có trong giỏ
+            var item = myCart.FirstOrDefault(item => item.MaHangHoa == id);
+            if (item != null)
+            {
+                myCart.Remove(item);
+                HttpContext.Session.Set("GioHang", myCart);
+            }
+
+            if (isAjaxCall) { }
             return RedirectToAction("Index");
         }
     }

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DoAn.ViewModels.CartItem>
+@using DoAn.Helpers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Shop";
+}
+
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="col-main">
+            <div class="cart">
+
+                <div class="page-content page-order">
+                    <div class="page-title">
+                        <h2>Giỏ hàng</h2>
+                    </div>
+
+
+                    <div class="order-detail-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered cart_summary">
+                                <thead>
+                                    <tr>
+                                        <th class="cart_product">Hàng Hóa</th>
+                                        <th>Mô Tả</th>
+                                        <th></th>
+                                        <th>Đơn Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành Tiền</th>
+                                        <th class="action"><i class="fa fa-trash-o"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="cart_product"><a asp-controller="HangHoa" asp-action="Detail" asp-route-id="@item.MaHangHoa">
+                                                <img src="~/Hinh/HangHoa/@item.Hinh" alt="@item.TenHangHoa"></a>
+                                            </td>
+                                            <td class="cart_description">
+                                                <p class="product-name"><a asp-controller="HangHoa" asp-action="Detail" asp-route-id="@item.MaHangHoa">@item.TenHangHoa</a></p>
+                                                <small><a href="#">Color : Red</a></small>
+                                                <small><a href="#">Size : M</a></small>
+                                            </td>
+                                            <td></td>
+                                            <td class="price">
+                                                <span>@item.DonGia.toVND()</span>
+                                            </td>
+                                            <td class="qty">
+                                                <input class="form-control input-sm" type="text" value="@item.SoLuong">
+                                            </td>
+                                            <td class="price">
+                                                <span>@item.ThanhTien.toVND()</span>
+                                            </td>
+                                            <td class="action"><a asp-controller="GioHang" asp-action="RemoveCartItem" asp-route-id="@item.MaHangHoa"><i class="icon-close"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" rowspan="2"></td>
+                                        <td colspan="3">Total products (tax incl.)</td>
+                                        <td colspan="2">$237.88 </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><strong>Total</strong></td>
+                                        <td colspan="2"><strong>$237.88 </strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="cart_navigation"> <a class="continue-btn" href="#"><i class="fa fa-arrow-left"> </i>&nbsp; Continue shopping</a> <a class="checkout-btn" href="#"><i class="fa fa-check"></i> Proceed to checkout</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

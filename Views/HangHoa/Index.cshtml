@@ -63,14 +63,14 @@
                                             </div>
                                             <div class="item-info">
                                                 <div class="info-inner">
-                                                    <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
+                                                    <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">@hh.TenHangHoa </a> </div>
                                                     <div class="item-content">
                                                         <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                                         <div class="item-price">
                                                             <div class="price-box"> <span class="regular-price"> <span class="price">@hh.DonGia</span> </span> </div>
                                                         </div>
                                                         <div class="pro-action">
-                                                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                                                            <button type="button" class="add-to-cart" data-id="@hh.MaHangHoa"><span>Thêm vào giỏ hàng</span> </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,3 +94,37 @@
         </div>
     </div>
 </div>
+
+@section Scripts{ 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function () {
+            $(".add-to-cart").click(function () {
+                $.ajax({
+                    url: "/GioHang/AddToCart",
+                    data: {
+                        id : $(this).data("id"),
+                        qty : 1,
+                        addType: "ajax"
+                    },
+                    success: function (res) {
+                        Swal.fire({
+                            title: 'Thêm giỏ hàng thành công',
+                            text: "Bạn muốn chuyển tới trang giỏ hàng?",
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Đồng ý',
+                            cancelButtonText: 'Ở lại'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/GioHang";
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
+}

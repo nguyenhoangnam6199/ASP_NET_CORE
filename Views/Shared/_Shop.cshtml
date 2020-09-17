@@ -359,40 +359,8 @@
                                             </a>
                                         </div>
                                         <div>
-                                            <div class="top-cart-content">
-                                                <div class="block-subtitle hidden">Recently added items</div>
-                                                <ul id="cart-sidebar" class="mini-products-list">
-                                                    <li class="item odd">
-                                                        <a href="shopping_cart.html" title="Product title here" class="product-image"><img src="~/shop/images/products/product-1.jpg" alt="html Template" width="65"></a>
-                                                        <div class="product-details">
-                                                            <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
-                                                            <p class="product-name"><a href="shopping_cart.html">Lorem ipsum dolor sit amet Consectetur</a> </p>
-                                                            <strong>1</strong> x <span class="price">$20.00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item even">
-                                                        <a href="shopping_cart.html" title="Product title here" class="product-image"><img src="~/shop/images/products/product-1.jpg" alt="html Template" width="65"></a>
-                                                        <div class="product-details">
-                                                            <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
-                                                            <p class="product-name"><a href="shopping_cart.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                            <strong>1</strong> x <span class="price">$230.00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item last odd">
-                                                        <a href="shopping_cart.html" title="Product title here" class="product-image"><img src="~/shop/images/products/product-1.jpg" alt="html Template" width="65"></a>
-                                                        <div class="product-details">
-                                                            <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
-                                                            <p class="product-name"><a href="shopping_cart.html">Sed do eiusmod tempor incidist</a> </p>
-                                                            <strong>2</strong> x <span class="price">$420.00</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="top-subtotal">Subtotal: <span class="price">$520.00</span></div>
-                                                <div class="actions">
-                                                    <button class="btn-checkout" type="button" onClick="location.href='checkout.html'"><i class="fa fa-check"></i><span>Checkout</span></button>
-                                                    <button class="view-cart" type="button" onClick="location.href='shopping_cart.html'"><i class="fa fa-shopping-cart"></i><span>View Cart</span></button>
-                                                </div>
-                                            </div>
+                                    @await Html.PartialAsync("_CartView")
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -879,6 +847,8 @@
 
     <!-- main js -->
     <script type="text/javascript" src="~/shop/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 main

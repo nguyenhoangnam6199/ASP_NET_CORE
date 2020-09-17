@@ -90,16 +90,16 @@
                             </div>
                         </div>
                         <div class="product-variation">
-                            <form action="#" method="post">
+                            <form asp-controller="GioHang" asp-action="AddToCart" asp-route-id="@Model.MaHangHoa" method="post">
                                 <div class="cart-plus-minus">
-                                    <label for="qty">Quantity:</label>
+                                    <label for="qty">Số lượng:</label>
                                     <div class="numbers-row">
-                                        <div onClick="var result = document.getElementById('qty'); var qty = result.value; if (!isNaN(qty) & amp & amp qty & gt; 0;) result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
-                                        <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                        <div onClick="var result = document.getElementById('qty'); var qty = result.value; if (!isNaN(qty) && qty >0) result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
+                                        <input type="text" class="qty" title="Qty" value="1" maxlength="12" max="@Model.SoLuong" id="qty" name="qty">
                                         <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
                                     </div>
                                 </div>
-                                <button class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> Add to Cart</span></button>
+                                <button class="button pro-add-to-cart" title="Add to Cart" type="submit"><span><i class="fa fa-shopping-basket"></i>Mua</span></button>
                             </form>
                         </div>
                         <div class="product-cart-option">
