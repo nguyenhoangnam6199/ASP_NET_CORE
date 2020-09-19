@@ -21,10 +21,17 @@ namespace DoAn.Data
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<DonHang> DonHangs { get; set; }
         public DbSet<DonHangChiTiet> DonHangChiTiets { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
+            modelBuilder.Entity<UserRole>(e =>
+            {
+                e.HasKey(t => new { t.RoleId, t.UserId });
+            });
+
             modelBuilder.Entity<KhachHang>(e =>
             {
                 e.HasIndex(kh => kh.Email).IsUnique();

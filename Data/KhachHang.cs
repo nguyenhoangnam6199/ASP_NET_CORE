@@ -28,6 +28,7 @@ namespace DoAn.Data
         public string MaNgauNhien { get; set; }
     }
 
+    [Table("Role")]
     public  class Role
     {
         [Key]
@@ -36,6 +37,16 @@ namespace DoAn.Data
         [Required]
         public string RoleName { get; set; }
         public bool IsSystem { get; set; }
+    }
 
+    [Table("UserRole")]
+    public class UserRole
+    {
+        public int RoleId { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("RoleId")]
+        public Role Role { get; set; }
+        [ForeignKey("UserId")]
+        public KhachHang User { get; set; }
     }
 }
