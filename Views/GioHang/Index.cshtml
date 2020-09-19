@@ -23,7 +23,6 @@
                                     <tr>
                                         <th class="cart_product">Hàng Hóa</th>
                                         <th>Mô Tả</th>
-                                        <th></th>
                                         <th>Đơn Giá</th>
                                         <th>Số lượng</th>
                                         <th>Thành Tiền</th>
@@ -44,7 +43,6 @@
                                                 <small><a href="#">Color : Red</a></small>
                                                 <small><a href="#">Size : M</a></small>
                                             </td>
-                                            <td></td>
                                             <td class="price">
                                                 <span>@item.DonGia.toVND()</span>
                                             </td>
@@ -59,12 +57,8 @@
                                     }
                                 </tbody>
                                 <tfoot>
-                                    @*<tr>
-                        <td colspan="2" rowspan="2"></td>
-                        <td colspan="3">Total products (tax incl.)</td>
-                        <td colspan="2">$237.88 </td>
-                    </tr>*@
                                     <tr>
+                                        <td colspan="2" rowspan="2"></td>
                                         <td colspan="3"><strong>Tổng tiền</strong></td>
                                         <td colspan="2"><strong>@Model.Sum(p => p.ThanhTien) </strong></td>
                                     </tr>

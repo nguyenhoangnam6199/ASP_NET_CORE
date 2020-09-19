@@ -13,6 +13,7 @@ namespace DoAn.Models
         public MyMapper()
         {
             CreateMap<HangHoa, CartItem>();
+            CreateMap<RegisterVM,KhachHang>();
         }
     }
 }

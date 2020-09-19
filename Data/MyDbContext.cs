@@ -18,10 +18,24 @@ namespace DoAn.Data
 
         public DbSet<ReviewHangHoa> ReviewHangHoas { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<KhachHang> KhachHangs { get; set; }
+        public DbSet<DonHang> DonHangs { get; set; }
+        public DbSet<DonHangChiTiet> DonHangChiTiets { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
+            modelBuilder.Entity<KhachHang>(e =>
+            {
+                e.HasIndex(kh => kh.Email).IsUnique();
+                e.Property(kh => kh.MatKhau).IsRequired();
+            });
+
+            modelBuilder.Entity<DonHangChiTiet>(e =>
+            {
+                e.HasKey(ctdh => new { ctdh.MaDh, ctdh.MaHh });
+            });
+
             modelBuilder.Entity<HangHoa>(e =>
             {
                 e.ToTable("HangHoa");
