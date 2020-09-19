@@ -351,18 +351,19 @@
                                 <div class="link-wishlist"> <a href="#"> <i class="icon-heart icons"></i><span> Wishlist</span></a> </div>
                                 <!-- top cart -->
                                 <div class="top-cart-contain">
-                                    <div class="mini-cart">
-                                        <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
-                                            <a href="#">
-                                                <div class="cart-icon"><i class="icon-basket-loaded icons"></i><span class="cart-total">3</span></div>
-                                                <div class="shoppingcart-inner hidden-xs"><span class="cart-title">My Cart</span> </div>
-                                            </a>
-                                        </div>
-                                        <div>
+                                    @*<div class="mini-cart">
+            <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
+                <a href="#">
+                    <div class="cart-icon"><i class="icon-basket-loaded icons"></i><span class="cart-total">3</span></div>
+                    <div class="shoppingcart-inner hidden-xs"><span class="cart-title">My Cart</span> </div>
+                </a>
+            </div>
+            <div>
+
+
+            </div>
+        </div>*@
                                     @await Html.PartialAsync("_CartView")
-                                           
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

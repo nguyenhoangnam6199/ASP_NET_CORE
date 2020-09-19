@@ -70,6 +70,10 @@ namespace DoAn
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=HangHoa}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=HangHoa}/{action=Index}/{id?}");
