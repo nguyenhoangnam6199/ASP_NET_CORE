@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DoAn.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +40,14 @@ namespace DoAn
             });
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(ck =>
+                {
+                    ck.LoginPath = "/KhachHang/DangNhap";
+                    ck.LogoutPath = "/KhachHang/DangXuat";
+                    ck.AccessDeniedPath = "/AccessDenied";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +69,7 @@ namespace DoAn
             app.UseRouting();
 
             app.UseSession();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -39,6 +39,10 @@ namespace DoAn.Controllers
                     _context.Add(khachHang);
                     _context.SaveChanges();
 
+                    //Add role for user
+                    //default: customor
+
+
                     return RedirectToAction("DangNhap");
                 }
             }
