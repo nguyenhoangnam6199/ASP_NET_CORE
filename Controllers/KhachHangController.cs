@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DoAn.Data;
 using DoAn.Helpers;
 using DoAn.Models;
 using DoAn.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DoAn.Controllers
 {
@@ -29,26 +33,35 @@ namespace DoAn.Controllers
         [HttpPost]
         public IActionResult DangKy(RegisterVM model)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                using (var transaction = _context.Database.BeginTransaction())
                 {
-                    var khachHang = _mapper.Map<KhachHang>(model);
-                    khachHang.MaNgauNhien = MyTools.GetRandom();
-                    khachHang.MatKhau = model.MatKhau.ToSHA512Hash(khachHang.MaNgauNhien);
-                    _context.Add(khachHang);
-                    _context.SaveChanges();
+                    try
+                    {
+                        var khachHang = _mapper.Map<KhachHang>(model);
+                        khachHang.MaNgauNhien = MyTools.GetRandom();
+                        khachHang.MatKhau = model.MatKhau.ToSHA512Hash(khachHang.MaNgauNhien);
+                        _context.Add(khachHang);
+                        _context.SaveChanges();
 
-                    //Add role for user
-                    //default: customor
-
-
-                    return RedirectToAction("DangNhap");
+                        //Add role for user
+                        //default: customor
+                        var userRole = new UserRole
+                        {
+                            RoleId = 4,
+                            UserId = khachHang.MaKh
+                        };
+                        transaction.Commit();
+                        return RedirectToAction("DangNhap");
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return View();
+                    }
                 }
-            }
-            catch
-            {
-                return View();
             }
             return View();
         }
@@ -62,7 +75,7 @@ namespace DoAn.Controllers
         }
 
         [HttpPost]
-        public IActionResult DangNhap(LoginVM model, string ReturnUrl = null)
+        public async Task<IActionResult> DangNhap(LoginVM model, string ReturnUrl = null)
         {
             ViewBag.ReturnUrl = ReturnUrl;
             string message = string.Empty;
@@ -79,10 +92,43 @@ namespace DoAn.Controllers
                     ViewBag.message = "Tài khoản đang bị khóa";
                     return View();
                 }
-                if(kh.MatKhau!= model.MatKhau.ToSHA512Hash(kh.MatKhau))
+                if(kh.MatKhau!= model.MatKhau.ToSHA512Hash(kh.MaNgauNhien))
                 {
                     ViewBag.message = "Sai thông tin đăng nhập !";
                     return View();
+                }
+
+                //set các claims
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, kh.HoTen),
+                    new Claim(ClaimTypes.Email, kh.Email)
+                };
+
+                var roles = _context.UserRoles.Where(r => r.UserId == kh.MaKh)
+                    .Select(ur => ur.Role).ToList();
+
+                foreach(var role in roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+                }
+
+                var claimIdentity = new ClaimsIdentity(claims, "login");
+                var claimPricipal = new ClaimsPrincipal(claimIdentity);
+                await HttpContext.SignInAsync(claimPricipal);
+
+                if (Url.IsLocalUrl(ReturnUrl))
+                {
+                    return Redirect(ReturnUrl);
+                }
+                else
+                {
+                    //nếu là admin
+                    if(User.IsInRole("Quản trị"))
+                    {
+                        return Redirect("/admin/HangHoa");
+                    }
+                    return RedirectToAction(actionName: "Profile", controllerName: "KhachHang");
                 }
             }
             ViewBag.message = message;
@@ -90,5 +136,25 @@ namespace DoAn.Controllers
         }
 
         #endregion
+
+        [Authorize]
+        public IActionResult Profile()
+        {
+            var user = User.Identities;
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DangXuat()
+        {
+           await HttpContext.SignOutAsync();
+            return RedirectToAction("/");
+        }
+
+        [Authorize, HttpGet]
+        public IActionResult ThanhToan()
+        {
+            return View();
+        }
     }
 }
