@@ -26,6 +26,8 @@ namespace DoAn.Data
         public bool DangHoatDong { get; set; }
         [MaxLength(10)]
         public string MaNgauNhien { get; set; }
+
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 
     [Table("Role")]
@@ -37,6 +39,7 @@ namespace DoAn.Data
         [Required]
         public string RoleName { get; set; }
         public bool IsSystem { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 
     [Table("UserRole")]

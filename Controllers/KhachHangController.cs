@@ -124,7 +124,7 @@ namespace DoAn.Controllers
                 }
                 else
                 {
-                    //nếu là admin
+                    //nếu là admin, muốn chuyển tới trang nào đó mà ta thích thì chuyển cái redirect đến cái tương ứng
                     if(User.IsInRole("Quản trị"))
                     {
                         return Redirect("/admin/HangHoa");

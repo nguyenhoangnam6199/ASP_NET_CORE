@@ -8,7 +8,9 @@ namespace DoAn.ViewModels
 {
     public class PhanQuyenVM
     {
+        [Display(Name = "Mã")]
         public int MaKh { get; set; }
+        [Display(Name = "Họ Tên")]
         public string HoTen { get; set; }
 
         [Display(Name ="Quản trị")]

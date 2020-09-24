@@ -6,6 +6,7 @@ using DoAn.Data;
 using DoAn.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DoAn.Areas.Admin.Controllers
@@ -29,29 +30,29 @@ namespace DoAn.Areas.Admin.Controllers
             return View();
         }
 
-      //  [Authorize(Roles = "Quản trị"), HttpGet]
+       //[Authorize(Roles = "Quản trị"), HttpGet]
         public IActionResult PhanQuyen()
         {
-            var user = _context.KhachHangs.AsQueryable();
+            var dsQuyen = _context.Roles.Select(p => p.RoleId).ToList();
+            var data = _context.KhachHangs.Include(kh => kh.UserRoles)
+                .Select(kh => new PhanQuyenVM
+                {
+                    MaKh = kh.MaKh,
+                    HoTen = kh.HoTen,
+                    QuanTri = kh.UserRoles.Any() && (kh.UserRoles.FirstOrDefault(ur => ur.RoleId == 1) != null),
+                    BanHang = kh.UserRoles.Any() && (kh.UserRoles.FirstOrDefault(ur => ur.RoleId == 2) != null),
+                    ThuKho = kh.UserRoles.Any() && (kh.UserRoles.FirstOrDefault(ur => ur.RoleId == 3) != null),
+                    KhachHang = kh.UserRoles.Any() && (kh.UserRoles.FirstOrDefault(ur => ur.RoleId == 4) != null)
+                });
+            
+            return View(data);
+        }
 
-            var userRole = _context.UserRoles.AsQueryable();
-
-            var viewModel = from kh in _context.Roles
-                            join khq in _context.UserRoles
-                            on kh.RoleId equals khq.RoleId
-                            into mygroup
-                            from p in mygroup.DefaultIfEmpty()
-                            select new PhanQuyenVM
-                            {
-                                MaKh = p.UserId,
-                                HoTen = p.User.HoTen,
-                                BanHang = p.RoleId == 2,
-                                QuanTri = p.RoleId == 1,
-                                ThuKho = p.RoleId == 3,
-                                KhachHang = p.RoleId == 4
-                            };
-
-            return Json(viewModel);
+        //[Authorize(Roles = "Quản trị"), HttpGet]
+        [HttpPost]
+        public IActionResult PhanQuyen(List<int> MaKh, List<bool> QuanTri)
+        {
+            return View();
         }
     }
 }
