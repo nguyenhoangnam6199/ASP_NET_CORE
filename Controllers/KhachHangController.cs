@@ -102,7 +102,8 @@ namespace DoAn.Controllers
                 var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, kh.HoTen),
-                    new Claim(ClaimTypes.Email, kh.Email)
+                    new Claim(ClaimTypes.Email, kh.Email),
+                    new Claim("MaNguoiDung",kh.MaKh.ToString())
                 };
 
                 var roles = _context.UserRoles.Where(r => r.UserId == kh.MaKh)
@@ -151,8 +152,7 @@ namespace DoAn.Controllers
             return RedirectToAction("/");
         }
 
-        [Authorize, HttpGet]
-        public IActionResult ThanhToan()
+        public IActionResult HangDaMua()
         {
             return View();
         }

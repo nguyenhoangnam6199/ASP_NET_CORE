@@ -13,6 +13,7 @@ namespace DoAn.Data
         [Key]
         public Guid MaDh { get; set; }
         public DateTime NgayDat { get; set; }
+        public int? MaKh { get; set; }
         [ForeignKey("MaKh")]
         public KhachHang KhachHang { get; set; }
         public string NguoiNhan { get; set; }

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "ThanhToan";
+    Layout = "_Shop";
+}
+
+<h1>Thanh Toán</h1>
+<form asp-action="ThanhToan">
+    <h2>Thông tin người mua</h2>
+    <h2>Thông tin hàng đặt mua</h2>
+    <h2>Thông tin người nhận hàng</h2>
+    <input type="checkbox" name="CungThongTinNguoiMua" />Cùng thông tin người mua<br />
+    <div class="row">
+        <label class="col-3">Người nhận</label>
+        <input class="col-9" name="NguoiNhan" />
+    </div>
+    <div class="row">
+        <label class="col-3">Địa chỉ giao</label>
+        <input class="col-9" name="DiaChiGiao" />
+    </div>
+    <button>Thanh toán</button>
+</form>
+
+
